@@ -1,22 +1,44 @@
-:root {
-  --text: #08060d;
-  --bg: #fff;
+@import 'tailwindcss';
 
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.45;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
+/* Paleta de EL DON (§12 del diseño) */
+:root {
+  --humo: #0d0a08;
+  --papel: #1c1512;
+  --papel2: #241b16;
+  --llama: #e8a33d;
+  --llama2: #f5c56b;
+  --sangre: #8c2f2f;
+  --anima: #6e8fa3;
+  --hueso: #d9cbb3;
+  --hueso2: #8a7d66;
+  --verde: #5e7350;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #f3f4f6;
-    --bg: #16171d;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-  margin: 0;
+  background: var(--humo);
+  color: var(--hueso);
+  font-family: 'Crimson Text', serif;
+  font-size: 17px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
