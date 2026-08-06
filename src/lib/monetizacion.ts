@@ -10,8 +10,14 @@ import {
 // Play Billing (suscripción y pago único) se conecta con la build Android
 // de la semana 3; hasta entonces las compras son una simulación marcada.
 
+// App ID de AdMob de Cinurna. Va también en el AndroidManifest.xml
+// (meta-data com.google.android.gms.ads.APPLICATION_ID) al añadir la
+// plataforma Android.
+export const ADMOB_APP_ID = 'ca-app-pub-7371077264502684~1873779434';
+
 // ID de prueba oficial de Google para rewarded. Reemplazar por el ad unit
-// real de la cuenta AdMob al pasar el closed testing.
+// real (ca-app-pub-7371077264502684/...) cuando se cree el bloque
+// "Recompensado" en AdMob.
 const REWARDED_ID_PRUEBA = 'ca-app-pub-3940256099942544/5224354917';
 
 export const esNativo = Capacitor.isNativePlatform();
