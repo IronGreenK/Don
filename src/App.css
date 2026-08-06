@@ -387,3 +387,51 @@ button.acc small {
   color: var(--hueso2);
   font-style: italic;
 }
+
+/* ---------- tienda ---------- */
+.ofertas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.oferta {
+  text-align: left;
+  font-family: 'Crimson Text', serif;
+  background: transparent;
+  border: 1px solid #4a3b2e;
+  border-radius: 8px;
+  color: var(--hueso);
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.oferta:active {
+  background: #2a2019;
+}
+.oferta:disabled {
+  opacity: 0.55;
+}
+.oferta.dorada {
+  border-color: var(--llama);
+}
+.oferta .o-nombre {
+  display: block;
+  font-family: 'IM Fell English', serif;
+  color: var(--llama);
+  margin-bottom: 3px;
+}
+.oferta.dorada .o-nombre {
+  color: var(--llama2);
+}
+.oferta .o-detalle {
+  display: block;
+  font-style: italic;
+  color: var(--hueso2);
+  font-size: 0.8rem;
+}
+.cerrar-tienda {
+  width: 100%;
+  margin-top: 16px;
+  opacity: 1 !important;
+  animation: none !important;
+}

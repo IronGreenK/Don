@@ -66,4 +66,10 @@ capacitor.config.ts        # appId com.irongreenk.eldon
 - [x] Sincronización runs ↔ Supabase con cuentas anónimas + cartas desde la DB
 - [ ] Habilitar Anonymous sign-ins en el panel de Supabase (un clic)
 
-**Semana 3:** AdMob real + build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)
+**Monetización (§8) — "El Mercachifle"**
+- [x] Tienda in-game: comercial recompensado (dobla la última ganancia), pago único (quitar anuncios) y suscripción (pactos offline x2 + ofrenda diaria)
+- [x] Plugin `@capacitor-community/admob` integrado: rewarded real en Android (con ID de prueba de Google), simulación en web
+- [ ] Crear el ad unit rewarded en la cuenta AdMob y reemplazar el ID de prueba (`src/lib/monetizacion.ts`)
+- [ ] Play Billing real + validación server-side (Edge Function) — llega con la build Android
+
+**Semana 3:** build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)

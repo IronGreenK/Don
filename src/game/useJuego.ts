@@ -9,6 +9,7 @@ import {
 } from './grados';
 import CARTAS from '../data/cartas.json';
 import { cargarCartasRemotas, cargarRunRemota, guardarRun } from '../lib/sync';
+import { cargarBeneficios } from './beneficios';
 
 const CLAVE_GUARDADO = 'el-don:partida:v1';
 const TOQUES_PARA_MONTE = 18;
@@ -46,9 +47,11 @@ function cargar(): EstadoJugador {
     if (!crudo) return nuevoEstado(0, 1, 0);
     const s = JSON.parse(crudo) as EstadoJugador;
     // Don pasivo acumulado mientras la app estuvo cerrada (§5: idle offline).
+    // La suscripción duplica el rendimiento offline (§8).
     if (!s.muerto && s.pactos > 0 && s.guardadoEn) {
       const segundosFuera = Math.max(0, Math.floor((Date.now() - s.guardadoEn) / 1000));
-      s.don += s.pactos * segundosFuera;
+      const multiplicador = cargarBeneficios().suscripcion ? 2 : 1;
+      s.don += s.pactos * segundosFuera * multiplicador;
     }
     return s;
   } catch {
@@ -148,8 +151,8 @@ function reducir(s: EstadoJugador, a: Accion): EstadoJugador {
   }
 }
 
-export function elegirCarta(s: EstadoJugador): Carta {
-  const esAd = Math.random() < PROB_CARTA_AD && s.ultimaGanancia > 2;
+export function elegirCarta(s: EstadoJugador, sinAds = false): Carta {
+  const esAd = !sinAds && Math.random() < PROB_CARTA_AD && s.ultimaGanancia > 2;
   if (esAd) {
     const ad = mazo.find((c) => c.tipo === 'ad');
     if (ad) return ad;
