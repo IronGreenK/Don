@@ -15,10 +15,14 @@ import {
 // plataforma Android.
 export const ADMOB_APP_ID = 'ca-app-pub-7371077264502684~1873779434';
 
-// ID de prueba oficial de Google para rewarded. Reemplazar por el ad unit
-// real (ca-app-pub-7371077264502684/...) cuando se cree el bloque
-// "Recompensado" en AdMob.
+// Bloque "Recompensado" real de Cinurna ("Trago del compadre").
+const REWARDED_ID = 'ca-app-pub-7371077264502684/3905046407';
+
+// En desarrollo se usa el ID de prueba oficial de Google: pedir anuncios
+// reales durante las pruebas puede marcar tráfico inválido en la cuenta.
 const REWARDED_ID_PRUEBA = 'ca-app-pub-3940256099942544/5224354917';
+
+const rewardedId = import.meta.env.PROD ? REWARDED_ID : REWARDED_ID_PRUEBA;
 
 export const esNativo = Capacitor.isNativePlatform();
 
@@ -49,7 +53,7 @@ export async function verComercial(): Promise<boolean> {
         recompensado = true;
       }
     );
-    await AdMob.prepareRewardVideoAd({ adId: REWARDED_ID_PRUEBA });
+    await AdMob.prepareRewardVideoAd({ adId: rewardedId });
     await AdMob.showRewardVideoAd();
     await escucha.remove();
     return recompensado;

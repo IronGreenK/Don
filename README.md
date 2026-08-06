@@ -70,7 +70,7 @@ capacitor.config.ts        # appId com.irongreenk.eldon
 - [x] Tienda in-game: comercial recompensado (dobla la última ganancia), pago único (quitar anuncios) y suscripción (pactos offline x2 + ofrenda diaria)
 - [x] Plugin `@capacitor-community/admob` integrado: rewarded real en Android (con ID de prueba de Google), simulación en web
 - [x] App AdMob "Cinurna" creada (App ID en `src/lib/monetizacion.ts`; al añadir Android va también como meta-data `com.google.android.gms.ads.APPLICATION_ID` en el AndroidManifest)
-- [ ] Crear el bloque de anuncios "Recompensado" en AdMob y reemplazar el ID de prueba (`src/lib/monetizacion.ts`)
+- [x] Bloque "Recompensado" creado y conectado (`.../3905046407`); en desarrollo se usa el ID de prueba de Google automáticamente
 - [ ] Play Billing real + validación server-side (Edge Function) — llega con la build Android
 
 **Semana 3:** build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)
