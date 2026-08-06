@@ -1,6 +1,6 @@
-# El Don
+# Cinurna
 
-Idle-narrativo de brujería folclórica latinoamericana: encarnas a un brujo de pueblo que asciende por los grados de la brujería; cuando mueres, tu aprendiz hereda parte de tu poder y el linaje continúa.
+Idle-narrativo de brujería folclórica latinoamericana: encarnas a un brujo de pueblo que asciende por los grados de la brujería; cuando mueres, tu aprendiz hereda parte de tu poder y el linaje continúa. *El Don* — el poder que se hereda — sigue siendo el corazón del juego, que fue diseñado bajo ese nombre de trabajo.
 
 Diseño completo en [`docs/EL-DON-diseno.md`](docs/EL-DON-diseno.md) · prototipo de referencia en [`docs/el-don.html`](docs/el-don.html).
 
