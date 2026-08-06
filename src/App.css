@@ -1,15 +1,389 @@
-.app-shell {
-  min-height: 100vh;
+#app {
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- cabecera ---------- */
+header {
+  padding: 14px 18px 8px;
+  text-align: center;
+}
+#nombre {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.5px;
+  color: var(--llama2);
+}
+#grado {
+  font-style: italic;
+  color: var(--hueso2);
+  font-size: 0.95rem;
+}
+#gen {
+  font-size: 0.8rem;
+  color: var(--hueso2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ---------- stats ---------- */
+#stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  padding: 10px 22px 4px;
+}
+.stat {
+  font-size: 0.85rem;
+}
+.stat .lbl {
+  display: flex;
+  justify-content: space-between;
+  color: var(--hueso2);
+  letter-spacing: 1px;
+}
+.stat .lbl b {
+  color: var(--hueso);
+  font-weight: 600;
+}
+.barra {
+  height: 4px;
+  background: #000;
+  border-radius: 2px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+.barra i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+#b-don i {
+  background: var(--llama);
+}
+#b-temor i {
+  background: var(--sangre);
+}
+#b-alma i {
+  background: var(--anima);
+}
+#b-plata i {
+  background: var(--verde);
+}
+
+/* ---------- escena vela ---------- */
+#escena {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  position: relative;
+}
+#vela {
+  cursor: pointer;
   text-align: center;
-  padding: 1rem;
+  transition: transform 0.08s;
+}
+#vela:active {
+  transform: scale(0.96);
+}
+.flama {
+  width: 26px;
+  height: 60px;
+  margin: 0 auto;
+  position: relative;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    #fff 0%,
+    var(--llama2) 25%,
+    var(--llama) 55%,
+    transparent 75%
+  );
+  border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+  filter: blur(0.5px);
+  animation: titilar 2.4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+@keyframes titilar {
+  0%,
+  100% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  20% {
+    transform: scaleY(1.08) skewX(2deg);
+  }
+  45% {
+    transform: scaleY(0.94) skewX(-3deg);
+  }
+  70% {
+    transform: scaleY(1.05) skewX(1.5deg);
+  }
+}
+.halo {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(232, 163, 61, 0.14) 0%, transparent 65%);
+  animation: respirar 4s ease-in-out infinite;
+}
+@keyframes respirar {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1.15;
+  }
+}
+.cuerpo-vela {
+  width: 34px;
+  height: 74px;
+  margin: -6px auto 0;
+  background: linear-gradient(180deg, #e9dfc8, #b8a98a 70%, #7d7159);
+  border-radius: 6px 6px 3px 3px;
+  position: relative;
+}
+.cuerpo-vela::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 8px;
+  background: #3a2f24;
+}
+#pie-vela {
+  margin-top: 14px;
+  font-style: italic;
+  color: var(--hueso2);
+  font-size: 0.9rem;
+  min-height: 1.4em;
+}
+.mas-uno {
+  position: absolute;
+  color: var(--llama2);
+  font-family: 'IM Fell English', serif;
+  pointer-events: none;
+  animation: subir 1s ease-out forwards;
+  font-size: 1.1rem;
+  z-index: 5;
+}
+@keyframes subir {
+  to {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
 }
 
-.pending {
-  opacity: 0.7;
-  font-size: 0.9rem;
+/* ---------- acciones ---------- */
+#acciones {
+  padding: 0 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+button.acc {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.05rem;
+  color: var(--hueso);
+  background: var(--papel);
+  border: 1px solid #3a2e24;
+  border-radius: 8px;
+  padding: 13px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+  opacity: 0;
+  animation: aparecer 0.8s ease forwards;
+}
+button.acc:active {
+  background: var(--papel2);
+}
+button.acc.dorado {
+  border-color: var(--llama);
+  color: var(--llama2);
+}
+@keyframes aparecer {
+  to {
+    opacity: 1;
+  }
+}
+button.acc small {
+  display: block;
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  color: var(--hueso2);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+/* ---------- carta ---------- */
+#velo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+#velo.abierto {
+  display: flex;
+}
+#carta {
+  width: 86%;
+  max-width: 340px;
+  background: linear-gradient(160deg, var(--papel2), var(--papel));
+  border: 1px solid #45362a;
+  border-radius: 12px;
+  padding: 26px 22px 20px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 40px rgba(0, 0, 0, 0.4);
+  animation: entrar 0.35s ease;
+  position: relative;
+}
+@keyframes entrar {
+  from {
+    transform: translateY(30px) rotate(1.5deg);
+    opacity: 0;
+  }
+}
+#carta .tipo {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--hueso2);
+  text-align: center;
+  margin-bottom: 12px;
+}
+#carta .texto {
+  font-size: 1.06rem;
+  line-height: 1.55;
+  text-align: center;
+  font-style: italic;
+  min-height: 80px;
+}
+#carta .edad-nota {
+  text-align: center;
+  color: var(--hueso2);
+  font-size: 0.8rem;
+  margin-top: 12px;
+}
+#opciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+#opciones button {
+  flex: 1;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  padding: 12px 8px;
+  background: transparent;
+  border: 1px solid #4a3b2e;
+  border-radius: 8px;
+  color: var(--hueso);
+  cursor: pointer;
+}
+#opciones button:active {
+  background: #2a2019;
+}
+#opciones button .flecha {
+  display: block;
+  font-family: 'IM Fell English', serif;
+  color: var(--llama);
+  margin-bottom: 3px;
+}
+#opciones button small {
+  font-style: italic;
+  color: var(--hueso2);
+}
+#resultado {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--llama2);
+  min-height: 1.3em;
+}
+
+/* ---------- prueba ---------- */
+.prob {
+  font-family: 'IM Fell English', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  color: var(--llama2);
+  margin: 10px 0 4px;
+}
+
+/* ---------- muerte ---------- */
+#muerte {
+  position: absolute;
+  inset: 0;
+  background: var(--humo);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  z-index: 20;
+}
+#muerte.abierto {
+  display: flex;
+}
+#muerte h2 {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.8rem;
+  color: var(--sangre);
+  margin-bottom: 14px;
+}
+#muerte p {
+  font-style: italic;
+  color: var(--hueso2);
+  line-height: 1.6;
+  max-width: 300px;
+}
+#herencia {
+  margin: 22px 0;
+  padding: 16px 22px;
+  border: 1px solid #3a2e24;
+  border-radius: 10px;
+  background: var(--papel);
+}
+#herencia .h-lbl {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--hueso2);
+}
+#herencia .h-val {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.5rem;
+  color: var(--llama2);
+}
+
+/* ---------- toast pasivo ---------- */
+#pactos-info {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.72rem;
+  color: var(--hueso2);
+  font-style: italic;
 }

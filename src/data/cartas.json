@@ -1,0 +1,700 @@
+[
+  {
+    "id": "llorona_vado",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Una mujer llora en el vado del río. Tiene la espalda vuelta. Sabes lo que es.",
+    "opciones": [
+      { "label": "Seguir de largo", "fx": {} },
+      {
+        "label": "Escuchar qué pide",
+        "fx": { "alma": -10, "pacto": 1 },
+        "resultado": "Te habla sin voz. Desde hoy, algo trabaja para ti mientras duermes."
+      }
+    ]
+  },
+  {
+    "id": "perro_negro",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "El perro negro aparece en el camino por tercera noche. No ladra. Espera.",
+    "opciones": [
+      {
+        "label": "Tirarle una piedra",
+        "fx": { "temor": 5 },
+        "resultado": "El pueblo murmura que le pegaste a lo que no se le pega."
+      },
+      {
+        "label": "Dejarle pan",
+        "fx": { "don": 8, "alma": -3 },
+        "resultado": "Lo come sin masticar. Te sientes más liviano y más extraño."
+      }
+    ]
+  },
+  {
+    "id": "vieja_cerro",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "La vieja del cerro ofrece enseñarte un remedio. A cambio quiere un mechón de tu pelo.",
+    "opciones": [
+      { "label": "Negarte", "fx": {}, "resultado": "Te mira largo. 'Volverás', dice." },
+      {
+        "label": "Dárselo",
+        "fx": { "don": 15, "temor": 8 },
+        "resultado": "Aprendes el remedio. Esa noche sueñas con tijeras."
+      }
+    ]
+  },
+  {
+    "id": "enfermo_desahuciado",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Un enfermo te manda a buscar. El doctor ya lo desahució. La familia junta plata.",
+    "opciones": [
+      { "label": "No meterte", "fx": { "alma": 5 }, "resultado": "Duermes tranquilo. El velorio es el jueves." },
+      {
+        "label": "Intentar la cura",
+        "fx": { "plata": 25, "temor": 10, "don": 5 },
+        "resultado": "Sana. Te pagan callados y no te miran a los ojos."
+      }
+    ]
+  },
+  {
+    "id": "entierro_espino",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Encuentras un entierro: monedas viejas bajo un espino. Dicen que la plata enterrada tiene dueño abajo.",
+    "opciones": [
+      { "label": "Taparlo de nuevo", "fx": { "alma": 4 }, "resultado": "Mejor deberle a los vivos que a los otros." },
+      {
+        "label": "Sacarlo",
+        "fx": { "plata": 40, "temor": 6, "alma": -6 },
+        "resultado": "La plata pesa más de lo que debería."
+      }
+    ]
+  },
+  {
+    "id": "cantina_apuesta",
+    "region": "pueblo",
+    "tipo": "apuesta",
+    "requisitos": { "grado_min": 0 },
+    "texto": "En la cantina, uno te desafía: doble o nada al cacho, tu plata contra la suya. Ríe fuerte. Trae un anillo que no es de acá.",
+    "opciones": []
+  },
+  {
+    "id": "cura_puerta",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "El cura llega a tu puerta. 'Sé lo que andas haciendo en el monte', dice.",
+    "opciones": [
+      { "label": "Negarlo todo", "fx": { "temor": -8 }, "resultado": "Te persignas. Él duda. Ganas tiempo." },
+      {
+        "label": "Sostenerle la mirada",
+        "fx": { "temor": 12, "don": 6 },
+        "resultado": "Se va sin bendecirte. El pueblo entero lo nota."
+      }
+    ]
+  },
+  {
+    "id": "lechuza_techo",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Una lechuza se para en tu techo tres noches seguidas. La vecina dice que alguien te está velando.",
+    "opciones": [
+      { "label": "Ignorarla", "fx": {}, "resultado": "La cuarta noche no vuelve. O no la oyes." },
+      {
+        "label": "Responderle en su lengua",
+        "fx": { "don": 12, "temor": 5 },
+        "resultado": "Contesta. Ahora sabes quién pregunta por ti."
+      }
+    ]
+  },
+  {
+    "id": "arriero_niebla",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Un arriero perdido te ofrece su mula si le muestras el camino. Hay niebla. Tú ves en la niebla.",
+    "opciones": [
+      { "label": "Cobrarle en plata", "fx": { "plata": 15 }, "resultado": "Paga y se va rápido, sin dar las gracias." },
+      {
+        "label": "Cobrarle un secreto",
+        "fx": { "don": 10 },
+        "resultado": "Te cuenta dónde duerme el que no debe ser nombrado."
+      }
+    ]
+  },
+  {
+    "id": "compadre_mal_echado",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Tu compadre enferma de repente. Sabes reconocer un mal echado. Y sabes quién lo echó.",
+    "opciones": [
+      {
+        "label": "Curarlo en silencio",
+        "fx": { "don": 8, "alma": 5 },
+        "resultado": "Sana. Nadie sabrá nunca lo que hiciste."
+      },
+      {
+        "label": "Devolver el mal",
+        "fx": { "don": 15, "alma": -12, "temor": 8 },
+        "resultado": "A la semana, en el otro extremo del pueblo, doblan campanas."
+      }
+    ]
+  },
+  {
+    "id": "puerta_monte",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Sueñas con una puerta en mitad del monte. Al despertar tienes barro en los pies.",
+    "opciones": [
+      { "label": "No volver a dormir ahí", "fx": { "alma": 3 }, "resultado": "Hay puertas que es mejor no abrir ni dormido." },
+      {
+        "label": "Buscar la puerta despierto",
+        "fx": { "don": 18, "alma": -8 },
+        "resultado": "La encuentras. No estaba cerrada."
+      }
+    ]
+  },
+  {
+    "id": "nina_pajaro",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Una niña del pueblo te trae un pájaro muerto. 'Me dijeron que tú los devuelves', dice.",
+    "opciones": [
+      {
+        "label": "Decirle que no se puede",
+        "fx": { "alma": 4 },
+        "resultado": "Llora. Pero es verdad: hay cosas que no vuelven."
+      },
+      {
+        "label": "Soplarle el pico",
+        "fx": { "don": 20, "temor": 15, "alma": -10 },
+        "resultado": "El pájaro vuela. La niña corre. Mañana lo sabrá todo el pueblo."
+      }
+    ]
+  },
+  {
+    "id": "compadre_trago",
+    "region": "camino",
+    "tipo": "ad",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Un compadre te alcanza en el camino y te ofrece un trago de su cantimplora. 'Pa' que rinda el día', dice.",
+    "opciones": []
+  },
+  {
+    "id": "sombreron_trenza",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "A la hija del herrero le amanecen trenzas que nadie le hizo. De noche se oye una guitarra chiquita.",
+    "opciones": [
+      {
+        "label": "Colgar espejos en su ventana",
+        "fx": { "plata": 12, "don": 4 },
+        "resultado": "El hombrecito del sombrero no vuelve. El herrero paga sin preguntar."
+      },
+      {
+        "label": "Pedirle al de la guitarra que enseñe",
+        "fx": { "don": 12, "temor": 6 },
+        "resultado": "Toca una sola cuerda. La aprendes. La niña duerme tranquila y tú ya no tanto."
+      }
+    ]
+  },
+  {
+    "id": "ciguapa_huellas",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Huellas de mujer que entran al monte... o salen de él. Van al revés. El cazador te ofrece plata por seguirlas.",
+    "opciones": [
+      {
+        "label": "Decirle que vuelva a su casa",
+        "fx": { "alma": 4 },
+        "resultado": "Se enoja. Pero esa noche duerme en su cama, no en el monte."
+      },
+      {
+        "label": "Seguirlas tú solo",
+        "fx": { "don": 14, "alma": -5 },
+        "resultado": "La ves peinarse junto al agua. No te mira. Con eso basta."
+      }
+    ]
+  },
+  {
+    "id": "cadejo_blanco",
+    "region": "camino",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Volviendo tarde, un perro blanco se te pega al costado. Donde él pisa, la noche pesa menos.",
+    "opciones": [
+      { "label": "Dejarlo acompañarte", "fx": { "alma": 6 }, "resultado": "En tu puerta se sienta, espera que entres, y recién ahí se va." },
+      {
+        "label": "Espantarlo — no te gusta deber favores",
+        "fx": { "don": 5, "temor": 3 },
+        "resultado": "Se aparta sin apuro. Detrás, lejos, algo negro se detiene también."
+      }
+    ]
+  },
+  {
+    "id": "duende_silbido",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "En la casa del molinero se pierden las cucharas y silba algo en el entretecho. Te mandan llamar.",
+    "opciones": [
+      {
+        "label": "Dejarle un sombrerito de lana",
+        "fx": { "plata": 10, "don": 5 },
+        "resultado": "El silbido se vuelve risa y la risa se va. Las cucharas amanecen en fila."
+      },
+      {
+        "label": "Sacarlo con sahumerio",
+        "fx": { "plata": 15, "temor": 4 },
+        "resultado": "Sale. Pero los duendes no olvidan la casa de donde los sacan, ni la mano."
+      }
+    ]
+  },
+  {
+    "id": "animas_procesion",
+    "region": "camino",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Velas que caminan solas por el camino real, a la hora en que no anda nadie. Una se aparta hacia ti.",
+    "opciones": [
+      { "label": "Bajar la vista y rezar", "fx": { "alma": 5 }, "resultado": "Pasan de largo. El aire huele a cera vieja hasta el alba." },
+      {
+        "label": "Tomar la vela que te ofrecen",
+        "fx": { "don": 16, "alma": -7 },
+        "resultado": "Arde frío. Cuando amanece ya no está, pero la mano te quedó sabiendo."
+      }
+    ]
+  },
+  {
+    "id": "mal_de_ojo_guagua",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Una madre trae a su guagua que llora sin lágrimas. Ojeada, dices apenas la ves. La madre te mira con miedo y con esperanza, todo junto.",
+    "opciones": [
+      {
+        "label": "Curarla con huevo y oración",
+        "fx": { "don": 6, "plata": 8, "alma": 3 },
+        "resultado": "El huevo sale cocido. La guagua duerme. La madre te besa la mano y eso también pesa."
+      },
+      {
+        "label": "Preguntar primero quién la ojeó",
+        "fx": { "don": 9, "temor": 5 },
+        "resultado": "Curas a la niña y te guardas el nombre. Los nombres sirven."
+      }
+    ]
+  },
+  {
+    "id": "velorio_angelito",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Velorio de angelito. Cantan toda la noche. La abuela te aparta: 'dicen que los que saben pueden preguntarle algo antes de que se vaya'.",
+    "opciones": [
+      { "label": "No preguntar nada", "fx": { "alma": 5 }, "resultado": "Cantas con los demás. Esta noche eres pueblo y nada más." },
+      {
+        "label": "Preguntar bajito",
+        "fx": { "don": 13, "temor": 7, "alma": -4 },
+        "resultado": "Los angelitos no mienten. Ojalá hubiera mentido."
+      }
+    ]
+  },
+  {
+    "id": "gallo_medianoche",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "El gallo del vecino canta a medianoche, tres noches seguidas. Canto de gallo a deshora: visita que viene, dicen. Y no de las buenas.",
+    "opciones": [
+      {
+        "label": "Poner sal en tu umbral",
+        "fx": { "alma": 3 },
+        "resultado": "Lo que venía pasó de largo. La sal amaneció negra."
+      },
+      {
+        "label": "Dejar la puerta sin tranca",
+        "fx": { "don": 15, "temor": 6, "alma": -6 },
+        "resultado": "No sabes qué entró, pero salió dejando algo. Los regalos de la noche no se agradecen."
+      }
+    ]
+  },
+  {
+    "id": "comadre_amarre",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Una comadre te trae una prenda de hombre y plata contada. 'Amárralo', pide. El hombre es casado. Con otra.",
+    "opciones": [
+      {
+        "label": "Devolverle la plata",
+        "fx": { "alma": 4 },
+        "resultado": "'Los amarres se pudren', le dices. Se va llorando, pero se va."
+      },
+      {
+        "label": "Hacer el trabajo",
+        "fx": { "plata": 30, "alma": -8, "temor": 5 },
+        "resultado": "El hombre deja a la esposa. El pueblo tiene una historia nueva y tu nombre anda en ella."
+      }
+    ]
+  },
+  {
+    "id": "espejo_velado",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "En la casa del finado no taparon un espejo. Ahora la viuda dice que su marido sigue ahí, peinándose a la hora de siempre.",
+    "opciones": [
+      {
+        "label": "Voltear el espejo contra la pared",
+        "fx": { "plata": 12, "alma": 3 },
+        "resultado": "Lo volteas con respeto. La casa descansa. La viuda también."
+      },
+      {
+        "label": "Mirar el espejo tú primero",
+        "fx": { "don": 14, "alma": -5 },
+        "resultado": "El finado te enseña cómo se ve el pueblo desde el otro lado del vidrio."
+      }
+    ]
+  },
+  {
+    "id": "mercachifle_baraja",
+    "region": "camino",
+    "tipo": "apuesta",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Un mercachifle tiende su manta y baraja unos naipes que no traen reyes: traen otras figuras. 'Una mano', ofrece. 'Tú pones la plata, yo pongo la suerte.'",
+    "opciones": []
+  },
+  {
+    "id": "semillas_luna",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "La luna está buena para sembrar lo que no se come. La vieja te dejó dicho: ruda, romero y una tercera hierba que solo crece si nadie la nombra.",
+    "opciones": [
+      {
+        "label": "Sembrar ruda y romero no más",
+        "fx": { "plata": 8, "alma": 2 },
+        "resultado": "Huerta sana, remedios pa'l año. Hay riquezas chicas que alcanzan."
+      },
+      {
+        "label": "Sembrar también la innombrada",
+        "fx": { "don": 12, "temor": 4 },
+        "resultado": "Crece en una noche. Las otras plantas se apartan de ella. Tú la riegas igual."
+      }
+    ]
+  },
+  {
+    "id": "nino_perdido_monte",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Se perdió el niño del carpintero. El monte de noche no devuelve lo que agarra, salvo que uno sepa pedir. Tú sabes pedir.",
+    "opciones": [
+      {
+        "label": "Buscarlo con los demás",
+        "fx": { "alma": 5, "temor": -4 },
+        "resultado": "Aparece dormido bajo un canelo. Dices que fue suerte. El pueblo te abraza."
+      },
+      {
+        "label": "Ir solo y pedir por él",
+        "fx": { "don": 15, "alma": -6 },
+        "resultado": "Te lo entregan sin un rasguño. Al monte ahora le debes una, y el monte cobra."
+      }
+    ]
+  },
+  {
+    "id": "deuda_del_finado",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "El finado Ramírez murió debiéndote. Anoche se sentó a los pies de tu cama, con el sombrero en la mano, a decirte dónde escondió la plata.",
+    "opciones": [
+      {
+        "label": "Perdonarle la deuda",
+        "fx": { "alma": 7 },
+        "resultado": "'Vaya tranquilo', le dices. Se va aliviado, y algo tuyo se alivia con él."
+      },
+      {
+        "label": "Ir a buscar la plata",
+        "fx": { "plata": 35, "temor": 5, "alma": -4 },
+        "resultado": "Estaba donde dijo. Le pagas con un responso. No vuelve, pero tampoco se despide."
+      }
+    ]
+  },
+  {
+    "id": "gato_ajeno",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Un gato que nadie conoce entra a tu cocina y te mira como se mira a un igual. Los gatos ven lo que uno esconde.",
+    "opciones": [
+      { "label": "Darle leche y dejarlo estar", "fx": { "don": 6 }, "resultado": "Se queda tres días. Esas tres noches nadie sueña feo en tu casa." },
+      {
+        "label": "Seguirlo cuando se vaya",
+        "fx": { "don": 10, "temor": 4 },
+        "resultado": "Te lleva a la casa de alguien que también sabe. Ahora se saben los dos."
+      }
+    ]
+  },
+  {
+    "id": "rezadora_rival",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Llegó una rezadora nueva al pueblo. Cura el empacho, saca el susto, y a ti te mira como quien mide un terreno.",
+    "opciones": [
+      {
+        "label": "Repartirse el pueblo en paz",
+        "fx": { "plata": 10, "alma": 3 },
+        "resultado": "Ella lo de arriba del estero, tú lo de abajo. Los que saben no se estorban."
+      },
+      {
+        "label": "Demostrarle quién sabe más",
+        "fx": { "don": 12, "temor": 8 },
+        "resultado": "Ganas. Se va del pueblo sin despedirse, y el pueblo entiende dos cosas: que sabes, y cuánto."
+      }
+    ]
+  },
+  {
+    "id": "sapo_boca_cosida",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Debajo de tu umbral aparece un sapo con la boca cosida con hilo rojo. Trabajo hecho, y hecho contra ti.",
+    "opciones": [
+      {
+        "label": "Quemarlo con sal y no preguntar",
+        "fx": { "alma": 3, "temor": -3 },
+        "resultado": "El humo se va derecho, sin viento. Lo que te mandaron vuelve a su dueño por el mismo camino."
+      },
+      {
+        "label": "Descoserlo y escuchar",
+        "fx": { "don": 14, "alma": -5 },
+        "resultado": "El sapo dice un nombre con voz de gente. Lo dice una sola vez. Suficiente."
+      }
+    ]
+  },
+  {
+    "id": "feria_del_santo",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0 },
+    "texto": "Fiesta del santo patrono. Procesión, cohetes, chicha. Buen día para pasar desapercibido — o para cobrar viejos favores entre la multitud.",
+    "opciones": [
+      {
+        "label": "Cargar el anda como todos",
+        "fx": { "temor": -10, "alma": 4 },
+        "resultado": "El cura te ve cargando al santo y algo en su cuenta contra ti se le borronea."
+      },
+      {
+        "label": "Cobrar favores entre la gente",
+        "fx": { "plata": 20, "temor": 4 },
+        "resultado": "Deudas viejas se pagan rápido cuando el santo anda cerca mirando."
+      }
+    ]
+  },
+  {
+    "id": "rio_crecido",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1 },
+    "texto": "El río bajó crecido y se llevó el puente. Del otro lado espera una parturienta. Los pactos sirven para esto, si uno se atreve a usarlos.",
+    "opciones": [
+      {
+        "label": "Buscar el paso lento y seguro",
+        "fx": { "alma": 4, "plata": 10 },
+        "resultado": "Llegas tarde pero llegas. Madre e hija viven. Te pagan con gallinas y bendiciones."
+      },
+      {
+        "label": "Cruzar como cruzan los tuyos",
+        "fx": { "don": 16, "alma": -6, "plata": 15 },
+        "resultado": "El agua no te toca. La partera jura que llegaste seco. Nadie le cree y todos te creen a ti."
+      }
+    ]
+  },
+  {
+    "id": "viuda_del_paso",
+    "region": "camino",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1 },
+    "texto": "En el paso oscuro, un peso se te sube al anca del caballo. Manos frías se prenden de tu cintura. La Viuda no pregunta: se sube.",
+    "opciones": [
+      {
+        "label": "Rezar fuerte y espolear",
+        "fx": { "temor": 4, "alma": 3 },
+        "resultado": "Al primer nombre santo, el peso se suelta. El caballo suda escarcha hasta tu casa."
+      },
+      {
+        "label": "Preguntarle qué busca",
+        "fx": { "don": 17, "alma": -7 },
+        "resultado": "Te lo dice al oído. Busca lo que todas: que alguien escuche. Escuchaste, y eso cobra precio."
+      }
+    ]
+  },
+  {
+    "id": "cruce_de_caminos",
+    "region": "camino",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1 },
+    "texto": "Medianoche en el cruce de caminos. Es la hora y el lugar donde se firman los tratos que no llevan papel.",
+    "opciones": [
+      {
+        "label": "Pasar de largo, todavía no",
+        "fx": { "alma": 3 },
+        "resultado": "Hay tratos que maduran. Este te espera: los cruces no se mueven."
+      },
+      {
+        "label": "Enterrar la botella con tu ofrenda",
+        "fx": { "alma": -12, "pacto": 1 },
+        "resultado": "A la tercera noche la botella amanece vacía y boca arriba. Trato aceptado. Algo más trabaja para ti."
+      }
+    ]
+  },
+  {
+    "id": "tesoro_luz",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1 },
+    "texto": "Una luz baja baila sobre la loma, donde no hay casa ni gente. Luz de entierro, plata que llama. Pero la plata enterrada prueba primero a quien la saca.",
+    "opciones": [
+      {
+        "label": "Marcar el sitio y volver de día",
+        "fx": { "plata": 25, "temor": 3 },
+        "resultado": "De día el monte es otro, pero tu marca sigue. Sacas lo justo y tapas el resto. Por si acaso."
+      },
+      {
+        "label": "Cavar de noche, a lo que salga",
+        "fx": { "plata": 45, "alma": -8, "temor": 6 },
+        "resultado": "Sacas el cántaro entero. Abajo del cántaro había algo más, y lo dejaste destapado."
+      }
+    ]
+  },
+  {
+    "id": "discipulo_puerta",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1 },
+    "texto": "Un muchacho toca tu puerta al alba. 'Quiero aprender', dice. Tiene la mirada que tú tenías cuando mirabas la vela.",
+    "opciones": [
+      {
+        "label": "Mandarlo a su casa",
+        "fx": { "alma": 3 },
+        "resultado": "'Esto no se busca', le dices. 'Esto encuentra.' Se va. Volverá: a ti también te devolvieron una vez."
+      },
+      {
+        "label": "Darle su primera tarea",
+        "fx": { "don": 10, "temor": 5 },
+        "resultado": "Le pides algo pequeño e imposible. Lo trae al otro día. Vas a tener que enseñarle en serio."
+      }
+    ]
+  },
+  {
+    "id": "carreta_sin_bueyes",
+    "region": "camino",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 2 },
+    "texto": "Ruido de carreta pesada en el camino real, pero no pasa ninguna carreta. Pasa el ruido no más, despacio, cargado.",
+    "opciones": [
+      {
+        "label": "Taparte los oídos hasta que pase",
+        "fx": { "alma": 3, "temor": 2 },
+        "resultado": "Lo que no se mira ni se oye, no lo lleva a uno. Esta vez."
+      },
+      {
+        "label": "Subirle tu carga al pasar",
+        "fx": { "don": 18, "alma": -8 },
+        "resultado": "Le echas encima lo que te pesaba: un recuerdo, un remordimiento. La carreta se lo lleva. Viaja más liviano el que sabe cargar ajeno."
+      }
+    ]
+  },
+  {
+    "id": "voz_en_el_pozo",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 2 },
+    "texto": "Del pozo seco de la plaza sube una voz que llama a la gente por su nombre. Al que contesta, le cambia la suerte. Nadie sabe para qué lado.",
+    "opciones": [
+      {
+        "label": "Sellar el pozo con las palabras que sabes",
+        "fx": { "don": 8, "temor": -6, "alma": 4 },
+        "resultado": "La voz se apaga como brasa pisada. El pueblo duerme mejor y no sabe a quién agradecerle."
+      },
+      {
+        "label": "Bajar a conversar",
+        "fx": { "don": 20, "alma": -10, "temor": 8 },
+        "resultado": "Abajo no hay nadie. Por eso mismo conversamos largo. Subes sabiendo cosas que no caben en balde."
+      }
+    ]
+  },
+  {
+    "id": "pacto_gallina_negra",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 2 },
+    "texto": "La receta vieja: gallina negra, cruce de caminos, luna menguante. Un socio que no envejece y no perdona. Los grandes tratos piden firma grande.",
+    "opciones": [
+      {
+        "label": "Guardar la receta para otro invierno",
+        "fx": { "alma": 4 },
+        "resultado": "La doblas y la guardas donde guardas lo que quema. Saber esperar también es del oficio."
+      },
+      {
+        "label": "Hacer el trabajo completo",
+        "fx": { "alma": -15, "pacto": 2, "temor": 6 },
+        "resultado": "Al canto del gallo el trato está hecho. Dos sombras más trabajan para ti. El precio lo sabrás después: siempre se sabe después."
+      }
+    ]
+  },
+  {
+    "id": "hueso_prestado",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 3 },
+    "texto": "Para el trabajo grande falta un hueso de cristiano, prestado con permiso. El panteonero es amigo, pero los muertos son quisquillosos con lo suyo.",
+    "opciones": [
+      {
+        "label": "Pedir permiso con velas y vino",
+        "fx": { "don": 15, "alma": -4, "plata": -10 },
+        "resultado": "El muerto presta de buena gana: era gente de servir. Devuelves el hueso al mes, con intereses de rezo."
+      },
+      {
+        "label": "Tomarlo sin pedir",
+        "fx": { "don": 22, "alma": -10, "temor": 10 },
+        "resultado": "El trabajo sale. Pero ahora, cuando pasas por el panteón, alguien camina detrás tuyo con paso corto."
+      }
+    ]
+  },
+  {
+    "id": "cueva_salamanca",
+    "region": "monte",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 3 },
+    "texto": "Encontraste la boca de la salamanca: adentro hay fiesta, y en esa fiesta se enseña lo que afuera no tiene nombre. La entrada se paga al salir.",
+    "opciones": [
+      {
+        "label": "Escuchar la música desde afuera",
+        "fx": { "don": 10, "temor": 3 },
+        "resultado": "Con lo que se cuela por las piedras aprendes dos tonadas. Adentro había cien."
+      },
+      {
+        "label": "Entrar a la fiesta",
+        "fx": { "don": 25, "alma": -12, "temor": 8 },
+        "resultado": "Bailaste con quienes no proyectan sombra y saliste sabiendo. Qué dejaste adentro, lo irás notando de a poco."
+      }
+    ]
+  }
+]
