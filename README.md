@@ -18,7 +18,9 @@ cp .env.example .env.local   # credenciales de Supabase (Project Settings → AP
 npm run dev
 ```
 
-El juego corre **offline-first**: la partida se guarda en `localStorage` y el Don pasivo por pactos se acumula aunque la app esté cerrada. Supabase entra para cuentas y sincronización.
+El juego corre **offline-first**: la partida se guarda en `localStorage` y el Don pasivo por pactos se acumula aunque la app esté cerrada. Con Supabase configurado, además: cuenta anónima automática, respaldo de la partida en la tabla `runs` (cada 15 s y al morir), restauración en dispositivos nuevos, y el mazo de cartas se carga desde la tabla `cards` (contenido actualizable sin release). Sin credenciales o sin red, todo sigue funcionando en local.
+
+> Requisito en Supabase: habilitar **Authentication → Sign In / Providers → Anonymous sign-ins** para que el respaldo funcione.
 
 ## Scripts
 
@@ -60,7 +62,8 @@ capacitor.config.ts        # appId com.irongreenk.eldon
 - [x] Persistencia local + Don pasivo offline
 - [x] ~40 cartas (41 en `src/data/cartas.json`)
 - [x] Esquema Supabase con RLS (`supabase/migrations/`) + seed de cartas
-- [ ] Aplicar la migración y el seed al proyecto Supabase remoto
-- [ ] Sincronización runs ↔ Supabase con cuentas anónimas
+- [x] Migración y seed aplicados al proyecto remoto `el-don` (sa-east-1)
+- [x] Sincronización runs ↔ Supabase con cuentas anónimas + cartas desde la DB
+- [ ] Habilitar Anonymous sign-ins en el panel de Supabase (un clic)
 
 **Semana 3:** AdMob real + build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)

@@ -1,13 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    'Faltan las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY. ' +
-      'Copia .env.example a .env.local y completa los valores.'
+// El juego es offline-first: sin credenciales funciona igual, solo sin sync.
+export const supabase: SupabaseClient | null =
+  supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null;
+
+if (!supabase) {
+  console.warn(
+    'Supabase sin configurar (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY): el juego corre solo en local.'
   );
 }
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
