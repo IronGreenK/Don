@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import type { Carta, EstadoJugador, Opcion } from './types';
 import {
   CASTIGO_FALLO,
@@ -8,12 +8,17 @@ import {
   HERENCIA_POR_GRADO,
 } from './grados';
 import CARTAS from '../data/cartas.json';
+import { cargarCartasRemotas, cargarRunRemota, guardarRun } from '../lib/sync';
+import { cargarBeneficios } from './beneficios';
 
 const CLAVE_GUARDADO = 'el-don:partida:v1';
 const TOQUES_PARA_MONTE = 18;
 const PROB_CARTA_AD = 0.16;
+const INTERVALO_SYNC_MS = 15000;
 
-export const cartas = CARTAS as Carta[];
+// Mazo local como base; si Supabase responde, el contenido remoto lo reemplaza
+// (contenido actualizable sin release, §9).
+let mazo: Carta[] = CARTAS as Carta[];
 
 function nuevoEstado(don0: number, gen: number, bonus: number): EstadoJugador {
   return {
@@ -42,9 +47,11 @@ function cargar(): EstadoJugador {
     if (!crudo) return nuevoEstado(0, 1, 0);
     const s = JSON.parse(crudo) as EstadoJugador;
     // Don pasivo acumulado mientras la app estuvo cerrada (§5: idle offline).
+    // La suscripción duplica el rendimiento offline (§8).
     if (!s.muerto && s.pactos > 0 && s.guardadoEn) {
       const segundosFuera = Math.max(0, Math.floor((Date.now() - s.guardadoEn) / 1000));
-      s.don += s.pactos * segundosFuera;
+      const multiplicador = cargarBeneficios().suscripcion ? 2 : 1;
+      s.don += s.pactos * segundosFuera * multiplicador;
     }
     return s;
   } catch {
@@ -90,6 +97,7 @@ function aplicarFx(s: EstadoJugador, o: Opcion): EstadoJugador {
 }
 
 export type Accion =
+  | { tipo: 'restaurar'; estado: EstadoJugador }
   | { tipo: 'tocarVela' }
   | { tipo: 'tick' }
   | { tipo: 'envejecer' }
@@ -101,6 +109,7 @@ export type Accion =
   | { tipo: 'renacer' };
 
 function reducir(s: EstadoJugador, a: Accion): EstadoJugador {
+  if (a.tipo === 'restaurar') return a.estado;
   if (s.muerto && a.tipo !== 'renacer') return s;
   switch (a.tipo) {
     case 'tocarVela': {
@@ -142,13 +151,13 @@ function reducir(s: EstadoJugador, a: Accion): EstadoJugador {
   }
 }
 
-export function elegirCarta(s: EstadoJugador): Carta {
-  const esAd = Math.random() < PROB_CARTA_AD && s.ultimaGanancia > 2;
+export function elegirCarta(s: EstadoJugador, sinAds = false): Carta {
+  const esAd = !sinAds && Math.random() < PROB_CARTA_AD && s.ultimaGanancia > 2;
   if (esAd) {
-    const ad = cartas.find((c) => c.tipo === 'ad');
+    const ad = mazo.find((c) => c.tipo === 'ad');
     if (ad) return ad;
   }
-  const disponibles = cartas.filter(
+  const disponibles = mazo.filter(
     (c) => c.tipo !== 'ad' && (c.requisitos.grado_min ?? 0) <= s.grado,
   );
   return disponibles[Math.floor(Math.random() * disponibles.length)];
@@ -166,6 +175,32 @@ export function useJuego() {
   // Persistencia local (offline-first, §9).
   useEffect(() => {
     localStorage.setItem(CLAVE_GUARDADO, JSON.stringify({ ...estado, guardadoEn: Date.now() }));
+  }, [estado]);
+
+  // Al arrancar: cartas frescas desde Supabase y, si es un dispositivo nuevo,
+  // restaurar la última partida respaldada.
+  useEffect(() => {
+    const habiaGuardadoLocal = localStorage.getItem(CLAVE_GUARDADO) !== null;
+    cargarCartasRemotas().then((remotas) => {
+      if (remotas?.length) mazo = remotas;
+    });
+    if (!habiaGuardadoLocal) {
+      cargarRunRemota().then((remota) => {
+        if (remota) despachar({ tipo: 'restaurar', estado: remota });
+      });
+    }
+    // Solo al montar: decide con el estado de ese momento.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Respaldo remoto: como mucho cada INTERVALO_SYNC_MS, e inmediato al morir.
+  const ultimoSync = useRef(0);
+  useEffect(() => {
+    const ahora = Date.now();
+    if (estado.muerto || ahora - ultimoSync.current > INTERVALO_SYNC_MS) {
+      ultimoSync.current = ahora;
+      void guardarRun(estado);
+    }
   }, [estado]);
 
   return { estado, despachar };

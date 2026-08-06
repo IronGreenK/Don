@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import {
+  cargarBeneficios,
+  guardarBeneficios,
+  hoy,
+  ofrendaDisponible,
+} from './game/beneficios';
 import { GRADOS } from './game/grados';
 import type { Opcion } from './game/types';
 import { elegirCarta, useJuego } from './game/useJuego';
+import { comprar, verComercial, type Producto } from './lib/monetizacion';
 import { CartaModal, type ContenidoModal } from './components/CartaModal';
 import { Muerte } from './components/Muerte';
 import { Stats } from './components/Stats';
+import { Tienda } from './components/Tienda';
 import { Vela } from './components/Vela';
 
 const PIE_INICIAL = 'La vela arde. Algo en la llama te devuelve la mirada.';
@@ -22,6 +30,12 @@ function App() {
   const [modal, setModal] = useState<ContenidoModal | null>(null);
   const [resultado, setResultado] = useState<string | null>(null);
   const [pie, setPie] = useState(PIE_INICIAL);
+  const [beneficios, setBeneficios] = useState(cargarBeneficios);
+  const [tiendaAbierta, setTiendaAbierta] = useState(false);
+
+  useEffect(() => {
+    guardarBeneficios(beneficios);
+  }, [beneficios]);
 
   useEffect(() => {
     if (estado.monteAbierto && estado.toques === 18) {
@@ -42,7 +56,7 @@ function App() {
 
   function salirAlMonte() {
     despachar({ tipo: 'envejecer' });
-    setModal({ clase: 'carta', carta: elegirCarta(estado) });
+    setModal({ clase: 'carta', carta: elegirCarta(estado, beneficios.sinAds) });
   }
 
   function elegirOpcion(o: Opcion) {
@@ -60,10 +74,41 @@ function App() {
     );
   }
 
-  function verAd() {
+  async function verAd() {
+    const completo = await verComercial();
+    if (!completo) {
+      setResultado('El trago se derramó antes de llegar a tu boca. Otra vez será.');
+      return;
+    }
     const ganancia = Math.max(5, Math.floor(estado.ultimaGanancia * 2));
     despachar({ tipo: 'cobrarAd', ganancia });
-    setResultado(`El trago quema bonito. +${ganancia} de Don. [demo: esto sería un ad]`);
+    setResultado(`El trago quema bonito. +${ganancia} de Don.`);
+  }
+
+  async function comercialDeTienda(): Promise<string> {
+    const completo = await verComercial();
+    if (!completo) return 'El comercial no llegó a destaparse. Otra vez será.';
+    const ganancia = Math.max(10, Math.floor(estado.ultimaGanancia * 2));
+    despachar({ tipo: 'cobrarAd', ganancia });
+    return `El trago quema bonito. +${ganancia} de Don.`;
+  }
+
+  async function comprarProducto(producto: Producto): Promise<string> {
+    const r = await comprar(producto);
+    if (r.ok) {
+      setBeneficios((b) =>
+        producto === 'sin_ads' ? { ...b, sinAds: true } : { ...b, suscripcion: true },
+      );
+    }
+    return r.mensaje;
+  }
+
+  function cobrarOfrenda() {
+    if (!ofrendaDisponible(beneficios)) return;
+    const ganancia = 25 + estado.grado * 25;
+    despachar({ tipo: 'cobrarAd', ganancia });
+    setBeneficios((b) => ({ ...b, ultimaOfrenda: hoy() }));
+    setPie(`La ofrenda amanece en tu puerta: +${ganancia} de Don.`);
   }
 
   function intentarPrueba() {
@@ -127,7 +172,28 @@ function App() {
             <small>estás listo para intentarlo</small>
           </button>
         )}
+        {ofrendaDisponible(beneficios) && (
+          <button type="button" className="acc dorado" onClick={cobrarOfrenda}>
+            La ofrenda del día
+            <small>tu sociedad con el Mercachifle rinde</small>
+          </button>
+        )}
+        {estado.monteAbierto && (
+          <button type="button" className="acc" onClick={() => setTiendaAbierta(true)}>
+            El Mercachifle
+            <small>tratos y mercedes</small>
+          </button>
+        )}
       </div>
+
+      {tiendaAbierta && !estado.muerto && (
+        <Tienda
+          beneficios={beneficios}
+          onVerComercial={comercialDeTienda}
+          onComprar={comprarProducto}
+          onCerrar={() => setTiendaAbierta(false)}
+        />
+      )}
 
       {modal && !estado.muerto && (
         <CartaModal

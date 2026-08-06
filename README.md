@@ -1,6 +1,6 @@
-# El Don
+# Cinurna
 
-Idle-narrativo de brujería folclórica latinoamericana: encarnas a un brujo de pueblo que asciende por los grados de la brujería; cuando mueres, tu aprendiz hereda parte de tu poder y el linaje continúa.
+Idle-narrativo de brujería folclórica latinoamericana: encarnas a un brujo de pueblo que asciende por los grados de la brujería; cuando mueres, tu aprendiz hereda parte de tu poder y el linaje continúa. *El Don* — el poder que se hereda — sigue siendo el corazón del juego, que fue diseñado bajo ese nombre de trabajo.
 
 Diseño completo en [`docs/EL-DON-diseno.md`](docs/EL-DON-diseno.md) · prototipo de referencia en [`docs/el-don.html`](docs/el-don.html).
 
@@ -18,7 +18,9 @@ cp .env.example .env.local   # credenciales de Supabase (Project Settings → AP
 npm run dev
 ```
 
-El juego corre **offline-first**: la partida se guarda en `localStorage` y el Don pasivo por pactos se acumula aunque la app esté cerrada. Supabase entra para cuentas y sincronización.
+El juego corre **offline-first**: la partida se guarda en `localStorage` y el Don pasivo por pactos se acumula aunque la app esté cerrada. Con Supabase configurado, además: cuenta anónima automática, respaldo de la partida en la tabla `runs` (cada 15 s y al morir), restauración en dispositivos nuevos, y el mazo de cartas se carga desde la tabla `cards` (contenido actualizable sin release). Sin credenciales o sin red, todo sigue funcionando en local.
+
+> Requisito en Supabase: habilitar **Authentication → Sign In / Providers → Anonymous sign-ins** para que el respaldo funcione.
 
 ## Scripts
 
@@ -60,7 +62,15 @@ capacitor.config.ts        # appId com.irongreenk.eldon
 - [x] Persistencia local + Don pasivo offline
 - [x] ~40 cartas (41 en `src/data/cartas.json`)
 - [x] Esquema Supabase con RLS (`supabase/migrations/`) + seed de cartas
-- [ ] Aplicar la migración y el seed al proyecto Supabase remoto
-- [ ] Sincronización runs ↔ Supabase con cuentas anónimas
+- [x] Migración y seed aplicados al proyecto remoto `el-don` (sa-east-1)
+- [x] Sincronización runs ↔ Supabase con cuentas anónimas + cartas desde la DB
+- [ ] Habilitar Anonymous sign-ins en el panel de Supabase (un clic)
 
-**Semana 3:** AdMob real + build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)
+**Monetización (§8) — "El Mercachifle"**
+- [x] Tienda in-game: comercial recompensado (dobla la última ganancia), pago único (quitar anuncios) y suscripción (pactos offline x2 + ofrenda diaria)
+- [x] Plugin `@capacitor-community/admob` integrado: rewarded real en Android (con ID de prueba de Google), simulación en web
+- [x] App AdMob "Cinurna" creada (App ID en `src/lib/monetizacion.ts`; al añadir Android va también como meta-data `com.google.android.gms.ads.APPLICATION_ID` en el AndroidManifest)
+- [x] Bloque "Recompensado" creado y conectado (`.../3905046407`); en desarrollo se usa el ID de prueba de Google automáticamente
+- [ ] Play Billing real + validación server-side (Edge Function) — llega con la build Android
+
+**Semana 3:** build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)
