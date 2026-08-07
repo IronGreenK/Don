@@ -74,3 +74,8 @@ capacitor.config.ts        # appId com.irongreenk.eldon
 - [ ] Play Billing real + validación server-side (Edge Function) — llega con la build Android
 
 **Semana 3:** build AAB + closed testing (12 testers × 14 días — reclutar YA, §11)
+
+## Publicación en Play Store
+
+- **Correo del desarrollador / contacto de la ficha:** nekuwari@gmail.com (la cuenta de Play Console se crea con este correo; el de AdMob se queda en la cuenta ya verificada)
+- Pendientes de la ficha (§11): política de privacidad con ese contacto, Data safety form, screenshots y descripción ASO en español
