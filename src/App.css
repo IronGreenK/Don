@@ -435,3 +435,21 @@ button.acc small {
   opacity: 1 !important;
   animation: none !important;
 }
+
+/* ---------- libro del linaje ---------- */
+.campo {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--hueso);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #4a3b2e;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+}
+.campo:focus {
+  border-color: var(--llama);
+}

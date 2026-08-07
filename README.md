@@ -20,7 +20,12 @@ npm run dev
 
 El juego corre **offline-first**: la partida se guarda en `localStorage` y el Don pasivo por pactos se acumula aunque la app esté cerrada. Con Supabase configurado, además: cuenta anónima automática, respaldo de la partida en la tabla `runs` (cada 15 s y al morir), restauración en dispositivos nuevos, y el mazo de cartas se carga desde la tabla `cards` (contenido actualizable sin release). Sin credenciales o sin red, todo sigue funcionando en local.
 
-> Requisito en Supabase: habilitar **Authentication → Sign In / Providers → Anonymous sign-ins** para que el respaldo funcione.
+**El libro del linaje** (en el juego): el jugador puede vincular su correo a la cuenta anónima para que el progreso sobreviva a borrados y cambios de celular, y recuperarlo en un dispositivo nuevo con un código de 6 dígitos enviado por correo.
+
+> Requisitos en el panel de Supabase:
+> 1. **Authentication → Sign In / Providers → Anonymous sign-ins** habilitado (respaldo automático).
+> 2. **Authentication → Emails → plantilla "Magic Link"**: añadir `{{ .Token }}` al cuerpo para que el correo incluya el código de 6 dígitos (p. ej. `<p>Tu seña: {{ .Token }}</p>`).
+> 3. El SMTP integrado de Supabase sirve para probar (pocos correos/hora); para producción conviene configurar un SMTP propio.
 
 ## Scripts
 
