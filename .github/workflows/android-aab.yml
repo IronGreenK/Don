@@ -1,0 +1,52 @@
+name: Compilar AAB de Cinurna
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  aab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Instalar dependencias y compilar la web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Sincronizar Capacitor
+        run: npx cap sync android
+
+      - name: Restaurar el keystore de subida
+        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: echo "$KEYSTORE_BASE64" | base64 -d > $RUNNER_TEMP/upload.keystore
+
+      - name: Compilar AAB de release
+        working-directory: android
+        env:
+          KEYSTORE_FILE: ${{ secrets.KEYSTORE_BASE64 != '' && format('{0}/upload.keystore', runner.temp) || '' }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew bundleRelease
+
+      - name: Publicar el AAB como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinurna-release-aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
