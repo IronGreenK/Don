@@ -14,6 +14,11 @@ export interface Opcion {
 
 export type TipoCarta = 'normal' | 'apuesta' | 'ad';
 
+export interface MediaCarta {
+  tipo: 'imagen' | 'video';
+  url: string;
+}
+
 export interface Carta {
   id: string;
   region: string;
@@ -21,6 +26,7 @@ export interface Carta {
   requisitos: { grado_min?: number };
   texto: string;
   opciones: Opcion[];
+  media?: MediaCarta | null;
 }
 
 export interface Grado {
