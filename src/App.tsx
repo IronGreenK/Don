@@ -11,6 +11,7 @@ import type { Opcion } from './game/types';
 import { elegirCarta, useJuego } from './game/useJuego';
 import { comprar, verComercial, type Producto } from './lib/monetizacion';
 import { CartaModal, type ContenidoModal } from './components/CartaModal';
+import { Linaje } from './components/Linaje';
 import { Muerte } from './components/Muerte';
 import { Stats } from './components/Stats';
 import { Tienda } from './components/Tienda';
@@ -32,6 +33,7 @@ function App() {
   const [pie, setPie] = useState(PIE_INICIAL);
   const [beneficios, setBeneficios] = useState(cargarBeneficios);
   const [tiendaAbierta, setTiendaAbierta] = useState(false);
+  const [linajeAbierto, setLinajeAbierto] = useState(false);
 
   useEffect(() => {
     guardarBeneficios(beneficios);
@@ -184,7 +186,20 @@ function App() {
             <small>tratos y mercedes</small>
           </button>
         )}
+        {estado.monteAbierto && (
+          <button type="button" className="acc" onClick={() => setLinajeAbierto(true)}>
+            El libro del linaje
+            <small>guarda o recupera tu partida</small>
+          </button>
+        )}
       </div>
+
+      {linajeAbierto && !estado.muerto && (
+        <Linaje
+          onRestaurar={(e) => despachar({ tipo: 'restaurar', estado: e })}
+          onCerrar={() => setLinajeAbierto(false)}
+        />
+      )}
 
       {tiendaAbierta && !estado.muerto && (
         <Tienda
