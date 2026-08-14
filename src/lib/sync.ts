@@ -81,7 +81,7 @@ export async function cargarCartasRemotas(): Promise<Carta[] | null> {
   try {
     const { data, error } = await supabase
       .from('cards')
-      .select('id, region, tipo, requisitos, texto, opciones')
+      .select('id, region, tipo, requisitos, texto, opciones, media')
       .eq('activa', true);
     if (error || !data?.length) return null;
     return data as Carta[];

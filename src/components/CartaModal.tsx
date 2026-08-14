@@ -45,6 +45,15 @@ export function CartaModal({
     <div id="velo" className="abierto">
       <div id="carta">
         <div className="tipo">{tipo}</div>
+        {carta?.media?.url && (
+          <div className="media">
+            {carta.media.tipo === 'video' ? (
+              <video src={carta.media.url} autoPlay muted loop playsInline />
+            ) : (
+              <img src={carta.media.url} alt="" loading="lazy" />
+            )}
+          </div>
+        )}
         <div className="texto">{texto}</div>
         {esPrueba && !resultado && (
           <div className="prob">{Math.round(contenido.grado.prob * 100)}%</div>
