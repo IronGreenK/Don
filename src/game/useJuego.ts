@@ -34,6 +34,8 @@ function nuevoEstado(don0: number, gen: number, bonus: number): EstadoJugador {
     muerto: false,
     toques: 0,
     monteAbierto: false,
+    marcas: [],
+    vistas: [],
     herencia: 0,
     causaMuerte: null,
     ultimaGanancia: 0,
@@ -46,6 +48,9 @@ function cargar(): EstadoJugador {
     const crudo = localStorage.getItem(CLAVE_GUARDADO);
     if (!crudo) return nuevoEstado(0, 1, 0);
     const s = JSON.parse(crudo) as EstadoJugador;
+    // Guardados anteriores a las cartas encadenadas.
+    s.marcas ??= [];
+    s.vistas ??= [];
     // Don pasivo acumulado mientras la app estuvo cerrada (§5: idle offline).
     // La suscripción duplica el rendimiento offline (§8).
     if (!s.muerto && s.pactos > 0 && s.guardadoEn) {
@@ -93,6 +98,7 @@ function aplicarFx(s: EstadoJugador, o: Opcion): EstadoJugador {
     alma: Math.min(100, Math.max(0, s.alma + (fx.alma ?? 0))),
     plata: Math.max(0, s.plata + (fx.plata ?? 0)),
     pactos: s.pactos + (fx.pacto ?? 0),
+    marcas: fx.marca ? [...s.marcas, fx.marca] : s.marcas,
   };
 }
 
@@ -100,7 +106,7 @@ export type Accion =
   | { tipo: 'restaurar'; estado: EstadoJugador }
   | { tipo: 'tocarVela' }
   | { tipo: 'tick' }
-  | { tipo: 'envejecer' }
+  | { tipo: 'abrirCarta'; carta: Carta }
   | { tipo: 'resolverOpcion'; opcion: Opcion }
   | { tipo: 'resolverApuesta'; gana: boolean; monto: number }
   | { tipo: 'cobrarAd'; ganancia: number }
@@ -124,8 +130,17 @@ function reducir(s: EstadoJugador, a: Accion): EstadoJugador {
     }
     case 'tick':
       return s.pactos > 0 ? { ...s, don: s.don + s.pactos } : s;
-    case 'envejecer':
-      return { ...s, edad: s.edad + 1 };
+    case 'abrirCarta': {
+      // Cada carta = 1 año. Se registra para no repetirla enseguida y,
+      // si era una carta encadenada, su marca queda consumida.
+      const marcaConsumida = a.carta.requisitos.marca;
+      return {
+        ...s,
+        edad: s.edad + 1,
+        vistas: [...s.vistas, a.carta.id].slice(-6),
+        marcas: marcaConsumida ? s.marcas.filter((m) => m !== marcaConsumida) : s.marcas,
+      };
+    }
     case 'resolverOpcion':
       return aplicarFx(s, a.opcion);
     case 'resolverApuesta':
@@ -151,15 +166,38 @@ function reducir(s: EstadoJugador, a: Accion): EstadoJugador {
   }
 }
 
+const PROB_CARTA_ENCADENADA = 0.5;
+const PRIMERA_CARTA = 'perro_negro';
+
 export function elegirCarta(s: EstadoJugador, sinAds = false): Carta {
+  // La primera salida al monte siempre es el perro negro: una apertura
+  // fuerte y arquetípica en vez de azar.
+  if (s.vistas.length === 0) {
+    const primera = mazo.find((c) => c.id === PRIMERA_CARTA);
+    if (primera) return primera;
+  }
+
+  // Las decisiones vuelven: si hay cartas encadenadas pendientes, tienen
+  // prioridad la mitad de las veces.
+  const encadenadas = mazo.filter(
+    (c) => c.requisitos.marca && s.marcas.includes(c.requisitos.marca),
+  );
+  if (encadenadas.length > 0 && Math.random() < PROB_CARTA_ENCADENADA) {
+    return encadenadas[Math.floor(Math.random() * encadenadas.length)];
+  }
+
   const esAd = !sinAds && Math.random() < PROB_CARTA_AD && s.ultimaGanancia > 2;
   if (esAd) {
     const ad = mazo.find((c) => c.tipo === 'ad');
     if (ad) return ad;
   }
-  const disponibles = mazo.filter(
-    (c) => c.tipo !== 'ad' && (c.requisitos.grado_min ?? 0) <= s.grado,
+
+  const base = mazo.filter(
+    (c) => c.tipo !== 'ad' && !c.requisitos.marca && (c.requisitos.grado_min ?? 0) <= s.grado,
   );
+  // Sin repetir las últimas cartas vistas, mientras el mazo lo permita.
+  const frescas = base.filter((c) => !s.vistas.includes(c.id));
+  const disponibles = frescas.length > 0 ? frescas : base;
   return disponibles[Math.floor(Math.random() * disponibles.length)];
 }
 
