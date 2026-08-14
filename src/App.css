@@ -453,3 +453,27 @@ button.acc small {
 .campo:focus {
   border-color: var(--llama);
 }
+
+/* ---------- media de carta ---------- */
+#carta .media {
+  margin: 0 -6px 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #3a2e24;
+  position: relative;
+}
+#carta .media img,
+#carta .media video {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  filter: sepia(0.25) saturate(0.85);
+}
+#carta .media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(13, 10, 8, 0.85);
+}

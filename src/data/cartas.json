@@ -43,7 +43,7 @@
       { "label": "Negarte", "fx": {}, "resultado": "Te mira largo. 'Volverás', dice." },
       {
         "label": "Dárselo",
-        "fx": { "don": 15, "temor": 8 },
+        "fx": { "don": 15, "temor": 8, "marca": "mechon_dado" },
         "resultado": "Aprendes el remedio. Esa noche sueñas con tijeras."
       }
     ]
@@ -73,7 +73,7 @@
       { "label": "Taparlo de nuevo", "fx": { "alma": 4 }, "resultado": "Mejor deberle a los vivos que a los otros." },
       {
         "label": "Sacarlo",
-        "fx": { "plata": 40, "temor": 6, "alma": -6 },
+        "fx": { "plata": 40, "temor": 6, "alma": -6, "marca": "entierro_sacado" },
         "resultado": "La plata pesa más de lo que debería."
       }
     ]
@@ -96,7 +96,7 @@
       { "label": "Negarlo todo", "fx": { "temor": -8 }, "resultado": "Te persignas. Él duda. Ganas tiempo." },
       {
         "label": "Sostenerle la mirada",
-        "fx": { "temor": 12, "don": 6 },
+        "fx": { "temor": 12, "don": 6, "marca": "cura_desafiado" },
         "resultado": "Se va sin bendecirte. El pueblo entero lo nota."
       }
     ]
@@ -179,7 +179,7 @@
       },
       {
         "label": "Soplarle el pico",
-        "fx": { "don": 20, "temor": 15, "alma": -10 },
+        "fx": { "don": 20, "temor": 15, "alma": -10, "marca": "pajaro_devuelto" },
         "resultado": "El pájaro vuela. La niña corre. Mañana lo sabrá todo el pueblo."
       }
     ]
@@ -346,7 +346,7 @@
       },
       {
         "label": "Hacer el trabajo",
-        "fx": { "plata": 30, "alma": -8, "temor": 5 },
+        "fx": { "plata": 30, "alma": -8, "temor": 5, "marca": "amarre_hecho" },
         "resultado": "El hombre deja a la esposa. El pueblo tiene una historia nueva y tu nombre anda en ella."
       }
     ]
@@ -597,7 +597,7 @@
       },
       {
         "label": "Darle su primera tarea",
-        "fx": { "don": 10, "temor": 5 },
+        "fx": { "don": 10, "temor": 5, "marca": "discipulo_aceptado" },
         "resultado": "Le pides algo pequeño e imposible. Lo trae al otro día. Vas a tener que enseñarle en serio."
       }
     ]
@@ -675,6 +675,120 @@
         "label": "Tomarlo sin pedir",
         "fx": { "don": 22, "alma": -10, "temor": 10 },
         "resultado": "El trabajo sale. Pero ahora, cuando pasas por el panteón, alguien camina detrás tuyo con paso corto."
+      }
+    ]
+  },
+  {
+    "id": "pajaro_canta",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0, "marca": "pajaro_devuelto" },
+    "texto": "El pájaro que devolviste canta en tu ventana cada noche. No es canto de pájaro. La niña ya no viene a verlo.",
+    "opciones": [
+      {
+        "label": "Devolverlo a la tierra",
+        "fx": { "alma": 5, "temor": -3 },
+        "resultado": "Lo entierras donde la niña lo encontró. El canto cesa. Algunas cosas vuelven solo para despedirse."
+      },
+      {
+        "label": "Aprender su canto",
+        "fx": { "don": 16, "alma": -6 },
+        "resultado": "Lo repites hasta que te sale. Ahora sabes llamar a los del otro lado. El pájaro, cumplido, se deshace."
+      }
+    ]
+  },
+  {
+    "id": "cura_pulpito",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0, "marca": "cura_desafiado" },
+    "texto": "Domingo. El cura predica sin nombrarte, pero todo el pueblo sabe de quién habla. Algunos ya no te saludan.",
+    "opciones": [
+      {
+        "label": "Ir a misa y sentarte adelante",
+        "fx": { "temor": -10, "alma": 3 },
+        "resultado": "Le sostienes el sermón entero. El pueblo ve que no te quemas al pisar la iglesia. El cura cambia de tema."
+      },
+      {
+        "label": "Mandarle un recado con el sacristán",
+        "fx": { "don": 10, "temor": 8 },
+        "resultado": "'Dígale que los dos servimos a lo invisible.' No hubo más sermones. Tampoco más saludos."
+      }
+    ]
+  },
+  {
+    "id": "vieja_cobra",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0, "marca": "mechon_dado" },
+    "texto": "Sueñas que la vieja del cerro teje con tu pelo. Al despertar, decides algo que no habías pensado decidir. El mechón trabaja.",
+    "opciones": [
+      {
+        "label": "Subir al cerro a exigirlo",
+        "fx": { "don": 8, "temor": 5 },
+        "resultado": "Te lo devuelve riendo. 'Ya aprendió el camino', dice. Del pelo. O de ti."
+      },
+      {
+        "label": "Dejárselo — que se pague la deuda",
+        "fx": { "don": 12, "alma": -6 },
+        "resultado": "Lo tejido, tejido está. Desde entonces sabes cosas de la vieja, y ella tuyas."
+      }
+    ]
+  },
+  {
+    "id": "dueno_entierro",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0, "marca": "entierro_sacado" },
+    "texto": "Tres golpes en la puerta a la hora de los muertos. Nadie afuera. La plata del espino amaneció fría como escarcha, y eso que era verano.",
+    "opciones": [
+      {
+        "label": "Devolver la mitad al hoyo",
+        "fx": { "plata": -20, "alma": 6 },
+        "resultado": "Entierras la mitad con una oración de las viejas. Los golpes cesan. Los muertos saben negociar."
+      },
+      {
+        "label": "Gastarla rápido en el pueblo",
+        "fx": { "plata": -15, "don": 10, "temor": 4 },
+        "resultado": "La plata maldita corre mejor: compra favores, lenguas y silencios. Lo frío queda en otras manos."
+      }
+    ]
+  },
+  {
+    "id": "esposa_amarrada",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 0, "marca": "amarre_hecho" },
+    "texto": "La esposa del hombre amarrado te espera en tu puerta. No trae llanto: trae la mirada seca de quien ya lloró todo. 'Deshazlo', dice.",
+    "opciones": [
+      {
+        "label": "Deshacer el amarre",
+        "fx": { "alma": 8, "plata": -10 },
+        "resultado": "Devuelves la plata cobrada y quemas la prenda. Hay trabajos que salen más caros deshechos que hechos."
+      },
+      {
+        "label": "Decirle que no hay vuelta",
+        "fx": { "temor": 10, "don": 6 },
+        "resultado": "Miente el que dice que no hay vuelta. Pero lo tuyo se respeta o se acaba. Ella lo entiende, y no perdona."
+      }
+    ]
+  },
+  {
+    "id": "discipulo_progresa",
+    "region": "pueblo",
+    "tipo": "normal",
+    "requisitos": { "grado_min": 1, "marca": "discipulo_aceptado" },
+    "texto": "Tu aprendiz ya cura empachos y espanta miradas. Hoy trajo algo que no le enseñaste: un sapo con la boca cosida. 'Para aprender a deshacerlo', dice.",
+    "opciones": [
+      {
+        "label": "Enseñarle a deshacerlo",
+        "fx": { "don": 10, "alma": 4 },
+        "resultado": "Aprende rápido y bien. El Don que se comparte no se gasta: se afila."
+      },
+      {
+        "label": "Preguntarle de dónde lo sacó",
+        "fx": { "don": 6, "temor": 6 },
+        "resultado": "Baja la vista. Lo hizo él, para practicar. Vas a tener que vigilar a este muchacho."
       }
     ]
   },

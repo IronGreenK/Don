@@ -4,6 +4,8 @@ export interface Efectos {
   alma?: number;
   plata?: number;
   pacto?: number;
+  /** Deja una marca: una decisión que el monte recordará (§6, cartas encadenadas). */
+  marca?: string;
 }
 
 export interface Opcion {
@@ -14,13 +16,20 @@ export interface Opcion {
 
 export type TipoCarta = 'normal' | 'apuesta' | 'ad';
 
+export interface MediaCarta {
+  tipo: 'imagen' | 'video';
+  url: string;
+}
+
 export interface Carta {
   id: string;
   region: string;
   tipo: TipoCarta;
-  requisitos: { grado_min?: number };
+  /** marca: la carta solo aparece si el jugador lleva esa marca (y la consume). */
+  requisitos: { grado_min?: number; marca?: string };
   texto: string;
   opciones: Opcion[];
+  media?: MediaCarta | null;
 }
 
 export interface Grado {
@@ -43,6 +52,8 @@ export interface EstadoJugador {
   muerto: boolean;
   toques: number;
   monteAbierto: boolean;
+  marcas: string[];
+  vistas: string[];
   herencia: number;
   causaMuerte: { titulo: string; texto: string } | null;
   ultimaGanancia: number;

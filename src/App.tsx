@@ -39,11 +39,17 @@ function App() {
     guardarBeneficios(beneficios);
   }, [beneficios]);
 
+  // Los primeros toques cuentan una historia: la vela despierta de a poco.
   useEffect(() => {
     if (estado.monteAbierto && estado.toques === 18) {
       setPie('Algo se mueve entre los árboles, allá afuera.');
+      return;
     }
-  }, [estado.monteAbierto, estado.toques]);
+    if (estado.monteAbierto || estado.gen > 1) return;
+    if (estado.toques === 1) setPie('La abuela decía que no se le habla a la llama. Tú igual la tocas.');
+    else if (estado.toques === 6) setPie('La llama se estira hacia tu mano, como reconociéndote.');
+    else if (estado.toques === 12) setPie('Así despierta el Don, dicen: de a poco, y sin pedir permiso.');
+  }, [estado.monteAbierto, estado.toques, estado.gen]);
 
   // El resultado queda a la vista un momento y la carta se cierra sola.
   useEffect(() => {
@@ -57,8 +63,9 @@ function App() {
   }, [resultado, despachar]);
 
   function salirAlMonte() {
-    despachar({ tipo: 'envejecer' });
-    setModal({ clase: 'carta', carta: elegirCarta(estado, beneficios.sinAds) });
+    const carta = elegirCarta(estado, beneficios.sinAds);
+    despachar({ tipo: 'abrirCarta', carta });
+    setModal({ clase: 'carta', carta });
   }
 
   function elegirOpcion(o: Opcion) {
